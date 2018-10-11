@@ -23,11 +23,11 @@ namespace Lab03_SystemIO
             {
                 try
                 {
-                    sw.Write("chocolate");
-                    sw.Write("moist");
-                    sw.Write("turtles");
-                    sw.Write("easter");
-                    sw.Write("christmas");
+                    sw.WriteLine("chocolate");
+                    sw.WriteLine("moist");
+                    sw.WriteLine("turtles");
+                    sw.WriteLine("easter");
+                    sw.WriteLine("christmas");
                 }
                 catch (Exception e)
                 {
