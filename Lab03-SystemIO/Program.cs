@@ -10,27 +10,33 @@ namespace Lab03_SystemIO
         {
             string path = "../../../words.txt";
             CreateFile(path);
+            //ReadFile(path);
+            //AppendToFile(path);
+
+            //DeleteLineFromFile(path);
         }
 
         static void CreateFile(string path)
         {
-            try
+
+            using (StreamWriter sw = new StreamWriter(path))
             {
-                if (!File.Exists(path))
+                try
                 {
-                    using (StreamWriter sw = new StreamWriter(path))
-                    {
-                        sw.Write("chocolate");
-                        sw.Write("moist");
-                        sw.Write("turtles");
-                        sw.Write("easter");
-                        sw.Write("christmas");
-                    }
-                } 
-            }
-            catch (Exception e)
-            {
-                throw e;
+                    sw.Write("chocolate");
+                    sw.Write("moist");
+                    sw.Write("turtles");
+                    sw.Write("easter");
+                    sw.Write("christmas");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    sw.Close();
+                }
             }
         }
     }
