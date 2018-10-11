@@ -7,7 +7,7 @@ namespace Lab03_SystemIO
     {
         static void Main(string[] args)
         {
-            Create("words.txt");
+            Create("../../../words.txt");
         }
 
         static void Create(string path)
