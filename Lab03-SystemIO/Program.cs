@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace Lab03_SystemIO
 {
@@ -19,11 +20,11 @@ namespace Lab03_SystemIO
                 {
                     using (StreamWriter sw = new StreamWriter(path))
                     {
-                        sw.WriteLine = "moist";
-                        sw.WriteLine = "chocolate";
-                        sw.WriteLine = "turtles";
-                        sw.WriteLine = "easter";
-                        sw.WriteLine = "christmas";
+                        sw.Write("chocolate");
+                        sw.Write("moist");
+                        sw.Write("turtles");
+                        sw.Write("easter");
+                        sw.Write("christmas");
                     }
                 } 
             }
