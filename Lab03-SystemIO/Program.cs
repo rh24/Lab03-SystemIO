@@ -10,7 +10,7 @@ namespace Lab03_SystemIO
             Create("../../../words.txt");
         }
 
-        static void Create(string path)
+        static void CreateFile(string path)
         {
             if (!File.Exists(path))
             {
