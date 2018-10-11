@@ -17,7 +17,7 @@ namespace Lab03_SystemIO
             {
                 if (!File.Exists(path))
                 {
-                    using (StreamWriter sw = File.Create(path))
+                    using (StreamWriter sw = new StreamWriter(path))
                     {
                         sw.WriteLine = "moist";
                         sw.WriteLine = "chocolate";
