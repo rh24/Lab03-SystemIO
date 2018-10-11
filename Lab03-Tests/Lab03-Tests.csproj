@@ -13,4 +13,8 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lab03-SystemIO\Lab03-SystemIO.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab03_SystemIO
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -16,7 +16,7 @@ namespace Lab03_SystemIO
             //DeleteLineFromFile(path);
         }
 
-        static void CreateFile(string path)
+        public static bool CreateFile(string path)
         {
 
             using (StreamWriter sw = new StreamWriter(path))
@@ -38,6 +38,8 @@ namespace Lab03_SystemIO
                     sw.Close();
                 }
             }
+
+            return File.Exists(path);
         }
     }
 }
