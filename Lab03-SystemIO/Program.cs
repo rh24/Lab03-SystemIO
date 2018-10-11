@@ -7,21 +7,29 @@ namespace Lab03_SystemIO
     {
         static void Main(string[] args)
         {
-            Create("../../../words.txt");
+            string path = "../../../words.txt";
+            CreateFile(path);
         }
 
         static void CreateFile(string path)
         {
-            if (!File.Exists(path))
+            try
             {
-                using (StreamWriter sw = File.Create(path))
+                if (!File.Exists(path))
                 {
-                    sw.WriteLine = "moist";
-                    sw.WriteLine = "chocolate";
-                    sw.WriteLine = "turtles";
-                    sw.WriteLine = "easter";
-                    sw.WriteLine = "christmas";
-                }
+                    using (StreamWriter sw = File.Create(path))
+                    {
+                        sw.WriteLine = "moist";
+                        sw.WriteLine = "chocolate";
+                        sw.WriteLine = "turtles";
+                        sw.WriteLine = "easter";
+                        sw.WriteLine = "christmas";
+                    }
+                } 
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }
