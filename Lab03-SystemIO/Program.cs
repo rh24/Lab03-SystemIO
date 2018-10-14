@@ -11,8 +11,8 @@ namespace Lab03_SystemIO
             string path = "../../../words.txt";
             CreateFile(path);
             AppendToFile(path, seedFile);
-            Console.WriteLine(ReadFile(path));
-            AppendToFile(path, Console.ReadLine());
+            //Console.WriteLine(ReadFile(path));
+            //AppendToFile(path, Console.ReadLine());
 
             DeleteLineFromFile(path, "chocolate");
         }
@@ -63,7 +63,7 @@ namespace Lab03_SystemIO
 
                     while ((s = sr.ReadLine()) != null)
                     {
-                        Console.WriteLine(s);
+                        //Console.WriteLine(s);
                     }
 
                     string[] readWords = File.ReadAllLines(path);
@@ -129,25 +129,28 @@ namespace Lab03_SystemIO
         /// <param name="path"></param>
         /// <param name="lineToRemove"></param>
         /// <returns></returns>
-        public static string[] DeleteLineFromFile(string path, string lineToRemove)
+        public static void DeleteLineFromFile(string path, string lineToRemove)
         {
             try
             {
                 string[] existingWords = ReadFile(path);
-                string[] remainingWords = new string[existingWords.Length - 1];
+                //string[] remainingWords = new string[existingWords.Length - 1];
 
                 File.WriteAllText(path, String.Empty);
-                StreamWriter sw = new StreamWriter(path);
 
                 for (int i = 0; i < existingWords.Length; i++)
                 {
-                    if (existingWords[i] != lineToRemove)
+                    if (!existingWords[i].Contains(lineToRemove))
                     {
-                        sw.WriteLine(existingWords[i]);
+                        AppendToFile(path, existingWords[i]);
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
 
-                return remainingWords;
+                //return remainingWords;
             }
             catch (Exception)
             {
