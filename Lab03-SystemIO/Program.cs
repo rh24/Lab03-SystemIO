@@ -171,6 +171,11 @@ namespace Lab03_SystemIO
             return File.Exists(path);
         }
 
+        /// <summary>
+        /// This method chooses a random word from my words.txt file using the Random class.
+        /// </summary>
+        /// <param name="path">relative path of file containing available words</param>
+        /// <returns>the chosen word</returns>
         public static string ChooseRandomWordFromFile(string path)
         {
             Random rand = new Random();
@@ -179,6 +184,11 @@ namespace Lab03_SystemIO
             return ReadFile(path)[randIdx];
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string DisplayUnderscoresFromChosenWord(string path)
         {
             string chosenWord = ChooseRandomWordFromFile(path);
