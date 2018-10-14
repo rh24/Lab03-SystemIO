@@ -204,6 +204,10 @@ namespace Lab03_SystemIO
             return sb.ToString();
         }
 
+        /// <summary>
+        /// This method directs the user to guess only one letter and checks the length of the user input string. If it's exactly one letter, the user input string will be returned, if not the user will be continually prompted to guess.
+        /// </summary>
+        /// <returns>one character string</returns>
         public static string GetUserGuess()
         {
             string userInput;
