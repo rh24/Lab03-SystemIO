@@ -10,11 +10,12 @@ namespace Lab03_SystemIO
         {
             string path = "../../../words.txt";
             CreateFile(path);
-            AppendToFile(path, seedFile);
+            //AppendToFile(path, seedFile);
             //Console.WriteLine(ReadFile(path));
             //AppendToFile(path, Console.ReadLine());
 
-            DeleteLineFromFile(path, "chocolate");
+            //DeleteLineFromFile(path, "chocolate");
+            Console.WriteLine(ChooseRandomWordFromFile(path));
         }
 
         public static string[] seedFile = { "chocolate", "moist", "turtles", "easter", "christmas" };
