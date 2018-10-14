@@ -6,10 +6,16 @@ Drawing from the words in a text file within this repository, users may play a h
 
 ## Sample Views
 
-![guessing_game_sample_view]()
+![guessing_game_sample_view](https://github.com/rh24/Lab03-SystemIO/blob/RebeccaHong-Lab03/assets/guessinggame.png)
 
 ## Get Started
 
+To get started, open up Visual Studio. Click into the solution explore, and run `Ctrl + f5` in order to start the application without debugging.
+
 ## Contributing
 
+Bug reports and pull requests are welcome on GitHub at https://github.com/rh24/Lab03-SystemIO. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+
 ## License
+
+This project is licensed under the MIT license.
