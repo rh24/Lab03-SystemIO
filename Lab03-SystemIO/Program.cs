@@ -12,7 +12,7 @@ namespace Lab03_SystemIO
             CreateFile(path);
             AppendToFile(path, seedFile);
             Console.WriteLine(ReadFile(path));
-            //AppendToFile(path);
+            AppendToFile(path, Console.ReadLine());
 
             //DeleteLineFromFile(path);
         }
@@ -79,7 +79,15 @@ namespace Lab03_SystemIO
         {
             using (StreamWriter sw = File.AppendText(path))
             {
-
+                try
+                {
+                    sw.WriteLine(userInput);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
 
