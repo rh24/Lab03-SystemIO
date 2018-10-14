@@ -126,7 +126,9 @@ namespace Lab03_SystemIO
 
         public static bool DeleteAFile(string path)
         {
+            File.Delete(path);
 
+            return File.Exists(path);
         }
     }
 }
