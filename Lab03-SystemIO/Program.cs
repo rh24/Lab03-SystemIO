@@ -101,7 +101,7 @@ namespace Lab03_SystemIO
             }
         }
 
-        public static bool DeleteLineFromFile(string path, string lineToRemove)
+        public static string[] DeleteLineFromFile(string path, string lineToRemove)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace Lab03_SystemIO
                     }
                 }
 
-                return true;
+                return remainingWords;
             }
             catch (Exception)
             {
