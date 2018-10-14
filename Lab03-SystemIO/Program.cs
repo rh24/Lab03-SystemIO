@@ -14,6 +14,9 @@ namespace Lab03_SystemIO
             DisplayMenu();
         }
 
+        /// <summary>
+        /// This method displays the options for what they can do within this console application.
+        /// </summary>
         public static void DisplayMenu()
         {
             Console.WriteLine("1. Start playing a game." + Environment.NewLine + "2. Add a word to the random word file" + Environment.NewLine + "3. View words in the external word file" + Environment.NewLine + "4. Remove a word from the file" + Environment.NewLine + "5. Exit");
@@ -53,6 +56,10 @@ namespace Lab03_SystemIO
             }
         }
 
+        /// <summary>
+        /// This is a method that triggers other methods in the class based on user's input in the console. It's basically the actions for the menu.
+        /// </summary>
+        /// <param name="userInput"></param>
         public static void DelegateResponse(string userInput)
         {
             string input = userInput.ToLower();
@@ -304,7 +311,7 @@ namespace Lab03_SystemIO
 
         /// <summary>
         /// This method uses StringComparison.CurrentCultureIgnoreCase and Regex to do a case insensitive string comparison between their references.
-        /// I use regex to check if there even is a match in the word before trying to find the index of the guessed letter. This is to running the for loop if I don't have to.
+        /// I use regex in an overloaded method to check if there even is a match in the word before trying to find the index of the guessed letter. This is to running the for loop if I don't have to.
         /// </summary>
         /// <param name="userInput">1 character length string the user guesses</param>
         /// <param name="chosenWord">the random word for current game</param>
@@ -337,6 +344,12 @@ namespace Lab03_SystemIO
             return sb;
         }
 
+        /// <summary>
+        /// This method does a case insensitive string comparison of whether the user's guessed letter is within the random word for the current game.
+        /// </summary>
+        /// <param name="chosenWord"></param>
+        /// <param name="userInput"></param>
+        /// <returns></returns>
         public static bool CheckIfUserGuessIsInChosenWord(string chosenWord, string userInput)
         {
             return Regex.IsMatch(chosenWord, userInput, RegexOptions.IgnoreCase);
