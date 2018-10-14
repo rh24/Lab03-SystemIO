@@ -154,9 +154,17 @@ namespace Lab03_SystemIO
             }
         }
 
+        /// <summary>
+        /// This method deletes the file of the path passed in.
+        /// </summary>
+        /// <param name="path">relative path of file to delete</param>
+        /// <returns></returns>
         public static bool DeleteAFile(string path)
         {
-            File.Delete(path);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
 
             return File.Exists(path);
         }
