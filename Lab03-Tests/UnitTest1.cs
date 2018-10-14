@@ -49,14 +49,15 @@ namespace Lab03_Tests
 
         }
 
-        /*
-        Test that the word chosen can accurately detect if the letter exists in the word(test that a letter does exist and does not exist)
-        */
+        /// <summary>
+        /// Test that the word chosen can accurately detect if the letter exists in the word(test that a letter does exist and does not exist)
+        /// </summary>
         [Theory]
         [InlineData(true, "han dynasty", "a")]
+        [InlineData(false, "szechuan", "t")]
         public void CanWordDetectIfLetterExistsInItself(bool expected, string wordToCheckAgainst, string checkFor)
         {
-
+            Assert.Equal(expected, CheckIfUserGuessIsInChosenWord(wordToCheckAgainst, checkFor));
         }
 
         /// <summary>

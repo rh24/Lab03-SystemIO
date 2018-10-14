@@ -312,7 +312,7 @@ namespace Lab03_SystemIO
         /// <returns>true or false, depending on whether the chosen word contains the guessed letter</returns>
         public static StringBuilder CheckIfUserGuessIsInChosenWord(string path, string userInput, string chosenWord, StringBuilder sb)
         {
-            bool guessRight = Regex.IsMatch(chosenWord, userInput, RegexOptions.IgnoreCase);
+            bool guessRight = CheckIfUserGuessIsInChosenWord(chosenWord, userInput);
             SaveUserGuessesToFile(path, userInput);
 
             // ToString() does not create a new object in memory. It simply returns the object.
@@ -335,6 +335,11 @@ namespace Lab03_SystemIO
             else Console.WriteLine("Not right. Try again.");
 
             return sb;
+        }
+
+        public static bool CheckIfUserGuessIsInChosenWord(string chosenWord, string userInput)
+        {
+            return Regex.IsMatch(chosenWord, userInput, RegexOptions.IgnoreCase);
         }
     }
 }
