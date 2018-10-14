@@ -26,7 +26,9 @@ namespace Lab03_SystemIO
                 SaveUserGuessesToFile(userGuesses, userInput);
                 underscoredWord = CheckIfUserGuessIsInChosenWord(userGuesses, userInput, randomWord, underscoredWord);
                 Console.WriteLine(string.Join(" ", underscoredWord.ToString().ToCharArray()));
-                if (!Regex.IsMatch(underscoredWord.ToString(), "_", RegexOptions.IgnoreCase))
+                bool blanksLeft = Regex.IsMatch(underscoredWord.ToString(), "_", RegexOptions.IgnoreCase);
+
+                if (!blanksLeft)
                 {
                     Console.WriteLine("You win!");
                     break;
