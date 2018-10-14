@@ -185,10 +185,12 @@ namespace Lab03_SystemIO
         }
 
         /// <summary>
-        /// 
+        /// This method takes the length of the random word and returns a new string of underscores in order to display it to the console. This is to mimic a word guessing game.
+        /// For example, a 5 letter word would display like so:
+        /// _ _ _ _ _
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">relative path of file containing words</param>
+        /// <returns>a string of underscores</returns>
         public static string DisplayUnderscoresFromChosenWord(string path)
         {
             string chosenWord = ChooseRandomWordFromFile(path);
