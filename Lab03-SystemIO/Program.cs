@@ -15,7 +15,7 @@ namespace Lab03_SystemIO
             //AppendToFile(path, Console.ReadLine());
 
             //DeleteLineFromFile(path, "chocolate");
-            Console.WriteLine(ChooseRandomWordFromFile(path));
+            Console.WriteLine(DisplayUnderscoresFromChosenWord(path));
         }
 
         public static string[] seedFile = { "chocolate", "moist", "turtles", "easter", "christmas" };
@@ -176,6 +176,19 @@ namespace Lab03_SystemIO
             int randIdx = rand.Next(ReadFile(path).Length);
 
             return ReadFile(path)[randIdx];
+        }
+
+        public static string DisplayUnderscoresFromChosenWord(string path)
+        {
+            string chosenWord = ChooseRandomWordFromFile(path);
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < chosenWord.Length; i++)
+            {
+                sb.Append("_ ");
+            }
+
+            return sb.ToString();
         }
     }
 }
