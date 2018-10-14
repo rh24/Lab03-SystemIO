@@ -10,6 +10,16 @@ namespace Lab03_SystemIO
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Welcome to my word guessing game! Enter exit at any point to quit.");
+            StartGame();
+        }
+
+
+        /// <summary>
+        /// This method starts the whole game. I originally had it in my Main method, but it looked very cluttered, so I moved it out.
+        /// </summary>
+        public static void StartGame()
+        {
             string path = "../../../words.txt";
             string userGuesses = "../../../guesses.txt";
             CreateFile(path);
@@ -30,17 +40,30 @@ namespace Lab03_SystemIO
 
                 if (!blanksLeft)
                 {
-                    Console.WriteLine("You win!");
+                    Console.WriteLine("You win!! Want to play again?");
+                    DelegateResponse(Console.ReadLine());
                     break;
                 }
             }
         }
 
-        public static string StartGame()
+        public static void DelegateResponse(string userInput)
         {
-            string userInput = GetUserGuess();
-
-            return userInput;
+            string input = userInput.ToLower();
+            switch (input)
+            {
+                case "y":
+                    DeleteAFile("../../../guesses.txt");
+                    StartGame();
+                    break;
+                case "n":
+                    Console.WriteLine("Thanks for playing!");
+                    System.Environment.Exit(-1);
+                    break;
+                default:
+                    Console.WriteLine("Please repond y/n");
+                    break;
+            }
         }
 
         public static string[] seedFile = { "chocolate", "moist", "turtles", "easter", "christmas" };
@@ -252,14 +275,7 @@ namespace Lab03_SystemIO
             {
                 Console.WriteLine("Guess a letter. Make sure you're only guessing one letter!");
                 userInput = Console.ReadLine();
-
-                if (userInput == "exit")
-                {
-                    userInput = "Goodbye! Thanks for playing!";
-                    break;
-                }
-
-            } while (userInput.Length != 1);
+            } while (userInput != "exit" && userInput.Length != 1);
 
             return userInput;
         }
@@ -288,6 +304,11 @@ namespace Lab03_SystemIO
                         sb.Insert(i, userInput, 1);
                     }
                 }
+            }
+            else if (userInput == "exit")
+            {
+                Console.WriteLine("Goodbye, thanks for playing!");
+                System.Environment.Exit(-1);
             }
             else Console.WriteLine("Not right. Try again.");
 
