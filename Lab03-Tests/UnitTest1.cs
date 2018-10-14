@@ -38,12 +38,14 @@ namespace Lab03_Tests
         Test that the word chosen can accurately detect if the letter exists in the word(test that a letter does exist and does not exist)
         */
 
-        //[Theory]
-        //[InlineData(true, "../../Lab03-SystemIO/words.txt", "chocolate")]
-        //public void CanUpdateByDeletingWord(bool expected, string path, string wordToDelete)
-        //{
-        //    ReadFile()
-        //    Assert.
-        //}
+        [Theory]
+        [InlineData(false, "../testFile.txt", "chocolate")]
+        public void CanUpdateByDeletingWord(bool expected, string path, string wordToDelete)
+        {
+            AppendToFile(path, wordToDelete);
+            DeleteLineFromFile(path, wordToDelete);
+            bool isContainedInFile = ReadFile(path).Contains(wordToDelete);
+            Assert.Equal(expected, isContainedInFile);
+        }
     }
 }
