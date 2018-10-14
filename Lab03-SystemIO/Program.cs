@@ -14,7 +14,7 @@ namespace Lab03_SystemIO
             Console.WriteLine(ReadFile(path));
             AppendToFile(path, Console.ReadLine());
 
-            //DeleteLineFromFile(path);
+            DeleteLineFromFile(path, "chocolate");
         }
 
         public static string[] seedFile = { "chocolate", "moist", "turtles", "easter", "christmas" };
@@ -74,15 +74,19 @@ namespace Lab03_SystemIO
                 {
                     throw;
                 }
+                finally
+                {
+                    sr.Close();
+                }
             }
         }
 
         /// <summary>
-        /// 
+        /// This method takes user input and updates the file with a new word.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="userInput"></param>
-        /// <returns></returns>
+        /// <param name="path">relative path of file</param>
+        /// <param name="userInput">string to add to file</param>
+        /// <returns>boolean indicating whether try block was successful</returns>
         public static bool AppendToFile(string path, string userInput)
         {
             using (StreamWriter sw = File.AppendText(path))
@@ -96,17 +100,35 @@ namespace Lab03_SystemIO
                 {
                     throw;
                 }
+                finally
+                {
+                    sw.Close();
+                }
             }
         }
 
+        /// <summary>
+        /// This method will seed the file with strings from an array that exists as a static field within this class.
+        /// </summary>
+        /// <param name="path">relative path of file</param>
+        /// <param name="seedData">field that contains words to write onto file</param>
         public static void AppendToFile(string path, string[] seedData)
         {
             using (StreamWriter sw = File.AppendText(path))
             {
-
+                for (int i = 0; i < seedData.Length; i++)
+                {
+                    sw.WriteLine(seedData[i]);
+                }
             }
         }
 
+        /// <summary>
+        /// This method 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="lineToRemove"></param>
+        /// <returns></returns>
         public static string[] DeleteLineFromFile(string path, string lineToRemove)
         {
             try
@@ -114,11 +136,14 @@ namespace Lab03_SystemIO
                 string[] existingWords = ReadFile(path);
                 string[] remainingWords = new string[existingWords.Length - 1];
 
+                File.WriteAllText(path, String.Empty);
+                StreamWriter sw = new StreamWriter(path);
+
                 for (int i = 0; i < existingWords.Length; i++)
                 {
                     if (existingWords[i] != lineToRemove)
                     {
-                        remainingWords[i] = existingWords[i];
+                        sw.WriteLine(existingWords[i]);
                     }
                 }
 
