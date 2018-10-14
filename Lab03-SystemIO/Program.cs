@@ -53,7 +53,7 @@ namespace Lab03_SystemIO
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static bool ReadFile(string path)
+        public static string[] ReadFile(string path)
         {
             using (StreamReader sr = File.OpenText(path))
             {
@@ -65,11 +65,13 @@ namespace Lab03_SystemIO
                     {
                         Console.WriteLine(s);
                     }
-                    return true;
+
+                    string[] readWords = File.ReadAllLines(path);
+
+                    return readWords;
                 }
                 catch (Exception e)
                 {
-                    return false;
                     throw;
                 }
             }
@@ -97,6 +99,34 @@ namespace Lab03_SystemIO
             {
 
             }
+        }
+
+        public static bool DeleteLineFromFile(string path, string lineToRemove)
+        {
+            try
+            {
+                string[] existingWords = ReadFile(path);
+                string[] remainingWords = new string[existingWords.Length - 1];
+
+                for (int i = 0; i < existingWords.Length; i++)
+                {
+                    if (existingWords[i] != lineToRemove)
+                    {
+                        remainingWords[i] = existingWords[i];
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static bool DeleteAFile(string path)
+        {
+
         }
     }
 }
