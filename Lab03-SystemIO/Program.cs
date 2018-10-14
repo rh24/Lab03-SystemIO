@@ -11,23 +11,36 @@ namespace Lab03_SystemIO
         static void Main(string[] args)
         {
             string path = "../../../words.txt";
+            string userGuesses = "../../../guesses.txt";
             CreateFile(path);
-            //AppendToFile(path, seedFile);
-            //Console.WriteLine(ReadFile(path));
-            //AppendToFile(path, Console.ReadLine());
+            CreateFile(userGuesses);
 
-            //DeleteLineFromFile(path, "chocolate");
             string randomWord = ChooseRandomWordFromFile(path);
-            StringBuilder underScoredWord = DisplayUnderscoresFromChosenWord(randomWord);
-            Console.WriteLine(String.Join(" ", underScoredWord.ToString().ToCharArray()));
-            string userInput = GetUserGuess();
+            StringBuilder underscoredWord = DisplayUnderscoresFromChosenWord(randomWord);
+            Console.WriteLine(String.Join(" ", underscoredWord.ToString().ToCharArray()));
+            //string userInput = GetUserGuess();
+            //SaveUserGuessesToFile(userGuesses, userInput);
 
             // while not won
-            Console.WriteLine(String.Join(" ", CheckIfUserGuessIsInChosenWord(userInput, randomWord, underScoredWord).ToString().ToCharArray()));
-            Console.ReadLine();
+            do
+            {
+                string userInput = GetUserGuess();
+                SaveUserGuessesToFile(userGuesses, userInput);
+                underscoredWord = CheckIfUserGuessIsInChosenWord(userGuesses, userInput, randomWord, underscoredWord);
+                Console.WriteLine(String.Join(" ", underscoredWord.ToString().ToCharArray()));
+
+            } while (!GameOver);
+        }
+
+        public static string StartGame()
+        {
+            string userInput = GetUserGuess();
+
+            return userInput;
         }
 
         public static string[] seedFile = { "chocolate", "moist", "turtles", "easter", "christmas" };
+        public static bool GameOver;
 
         /// <summary>
         /// This method creates a file if it doesn't already exist.
@@ -44,9 +57,9 @@ namespace Lab03_SystemIO
                     {
                         sw.WriteLine("Success!");
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
-                        throw e;
+                        throw;
                     }
                     finally
                     {
@@ -80,7 +93,7 @@ namespace Lab03_SystemIO
 
                     return readWords;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw;
                 }
@@ -130,6 +143,18 @@ namespace Lab03_SystemIO
                 {
                     sw.WriteLine(seedData[i]);
                 }
+            }
+        }
+
+        public static void SaveUserGuessesToFile(string path, string userInput)
+        {
+            try
+            {
+                AppendToFile(path, userInput);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -237,21 +262,21 @@ namespace Lab03_SystemIO
 
         /// <summary>
         /// This method uses StringComparison.CurrentCultureIgnoreCase and Regex to do a case insensitive string comparison between their references.
-        /// I use regex to check if there even is a match in the word before trying to find the index of the guessed letter. This is to avoid a common exception. Instead of using a try-catch, I use regex and an if statement in order to execute less code.
+        /// I use regex to check if there even is a match in the word before trying to find the index of the guessed letter. This is to running the for loop if I don't have to.
         /// </summary>
         /// <param name="userInput">1 character length string the user guesses</param>
         /// <param name="chosenWord">the random word for current game</param>
         /// <param name="sb">StringBuilder object returned from DisplayUnderscoresFromChosenWord method</param>
         /// <returns>true or false, depending on whether the chosen word contains the guessed letter</returns>
-        public static StringBuilder CheckIfUserGuessIsInChosenWord(string userInput, string chosenWord, StringBuilder sb)
+        public static StringBuilder CheckIfUserGuessIsInChosenWord(string path, string userInput, string chosenWord, StringBuilder sb)
         {
             bool guessRight = Regex.IsMatch(chosenWord, userInput, RegexOptions.IgnoreCase);
+            bool anyGuessesLeft = Regex.IsMatch(sb.ToString(), "_", RegexOptions.IgnoreCase);
+            SaveUserGuessesToFile(path, userInput);
 
             // ToString() does not create a new object in memory. It simply returns the object.
             if (guessRight)
             {
-                userInput = userInput.PadRight(1);
-
                 for (int i = 0; i < chosenWord.Length; i++)
                 {
                     if (chosenWord[i].ToString().Equals(userInput, StringComparison.CurrentCultureIgnoreCase))
@@ -261,7 +286,12 @@ namespace Lab03_SystemIO
                     }
                 }
             }
-            else Console.WriteLine("not right");
+            else if (!anyGuessesLeft)
+            {
+                GameOver = true;
+                Console.WriteLine("You win!!");
+            }
+            else Console.WriteLine("Not right. Try again.");
 
             return sb;
         }
