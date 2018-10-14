@@ -17,16 +17,15 @@ namespace Lab03_SystemIO
 
             //DeleteLineFromFile(path, "chocolate");
             string randomWord = ChooseRandomWordFromFile(path);
-            string underScoredWord = DisplayUnderscoresFromChosenWord(randomWord).ToString();
+            StringBuilder underScoredWord = DisplayUnderscoresFromChosenWord(randomWord);
             string userInput = GetUserGuess();
 
             // while not won
-            CheckIfUserGuessIsInChosenWord(randomWord, userInput);
+            CheckIfUserGuessIsInChosenWord(randomWord, userInput, underScoredWord);
 
         }
 
         public static string[] seedFile = { "chocolate", "moist", "turtles", "easter", "christmas" };
-        public static StringComparer CurrentCultureIgnoreCase { get; }
 
         /// <summary>
         /// This method creates a file if it doesn't already exist.
@@ -235,18 +234,24 @@ namespace Lab03_SystemIO
         }
 
         /// <summary>
-        /// I have set a property on my Program class called CurrentCultureIgnoreCase. It is of type StringComparer.
-        /// This method uses declares two variables of type StringComparer and then does a case insensitive string comparison between their references.
+        /// This method uses StringComparison.CurrentCultureIgnoreCase and Regex to do a case insensitive string comparison between their references.
         /// </summary>
         /// <param name="userInput">1 character length string the user guesses</param>
         /// <param name="chosenWord">the random word for current game</param>
+        /// <param name="sb">StringBuilder object returned from DisplayUnderscoresFromChosenWord method</param>
         /// <returns>true or false, depending on whether the chosen word contains the guessed letter</returns>
-        public static string CheckIfUserGuessIsInChosenWord(string userInput, string chosenWord)
+        public static StringBuilder CheckIfUserGuessIsInChosenWord(string userInput, string chosenWord, StringBuilder sb)
         {
-            StringBuilder sb = new StringBuilder();
             bool guessRight = Regex.IsMatch(chosenWord, userInput, RegexOptions.IgnoreCase);
 
-            return newString;
+            // ToString() does not create a new object in memory. It simply returns the object.
+            if (guessRight)
+            {
+                int indexOfLetter = sb.ToString().IndexOf(userInput, 0, chosenWord.Length, StringComparison.CurrentCultureIgnoreCase);
+                sb.Replace("_", userInput, indexOfLetter, 1);
+            }
+
+            return sb;
         }
     }
 }
