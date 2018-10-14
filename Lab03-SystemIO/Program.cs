@@ -16,7 +16,7 @@ namespace Lab03_SystemIO
 
         public static void DisplayMenu()
         {
-            Console.WriteLine("1. Start playing a game." + System.Environment.NewLine + "2. Add a word to the random word file" + System.Environment.NewLine + "3. View words in the external word file" + System.Environment.NewLine + "4. Exit");
+            Console.WriteLine("1. Start playing a game." + Environment.NewLine + "2. Add a word to the random word file" + Environment.NewLine + "3. View words in the external word file" + Environment.NewLine + "4. Remove a word from the file" + Environment.NewLine + "5. Exit");
             DelegateResponse(Console.ReadLine());
         }
 
@@ -79,10 +79,15 @@ namespace Lab03_SystemIO
                     break;
                 case "3":
                     Console.WriteLine("Here are all the words in the words.txt file:");
-                    Console.WriteLine(string.Join(System.Environment.NewLine, ReadFile("../../../words.txt")));
+                    ReadFile("../../../words.txt");
                     DisplayMenu();
                     break;
                 case "4":
+                    Console.WriteLine("Type in a word you'd like to delete:");
+                    DeleteLineFromFile("../../../words.txt", Console.ReadLine());
+                    DisplayMenu();
+                    break;
+                case "5":
                     Console.WriteLine("Have a great day!");
                     System.Environment.Exit(-1);
                     break;
@@ -140,7 +145,7 @@ namespace Lab03_SystemIO
 
                     while ((s = sr.ReadLine()) != null)
                     {
-                        //Console.WriteLine(s);
+                        Console.WriteLine(s);
                     }
 
                     string[] readWords = File.ReadAllLines(path);
