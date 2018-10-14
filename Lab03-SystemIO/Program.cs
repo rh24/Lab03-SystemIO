@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Lab03_SystemIO
@@ -18,11 +19,12 @@ namespace Lab03_SystemIO
             //DeleteLineFromFile(path, "chocolate");
             string randomWord = ChooseRandomWordFromFile(path);
             StringBuilder underScoredWord = DisplayUnderscoresFromChosenWord(randomWord);
+            Console.WriteLine(String.Join(" ", underScoredWord.ToString().ToCharArray()));
             string userInput = GetUserGuess();
 
             // while not won
-            CheckIfUserGuessIsInChosenWord(randomWord, userInput, underScoredWord);
-
+            Console.WriteLine(String.Join(" ", CheckIfUserGuessIsInChosenWord(userInput, randomWord, underScoredWord).ToString().ToCharArray()));
+            Console.ReadLine();
         }
 
         public static string[] seedFile = { "chocolate", "moist", "turtles", "easter", "christmas" };
@@ -203,7 +205,7 @@ namespace Lab03_SystemIO
 
             for (int i = 0; i < chosenWord.Length; i++)
             {
-                sb.Append("_ ");
+                sb.Append("_");
             }
 
             return sb;
@@ -235,6 +237,7 @@ namespace Lab03_SystemIO
 
         /// <summary>
         /// This method uses StringComparison.CurrentCultureIgnoreCase and Regex to do a case insensitive string comparison between their references.
+        /// I use regex to check if there even is a match in the word before trying to find the index of the guessed letter. This is to avoid a common exception. Instead of using a try-catch, I use regex and an if statement in order to execute less code.
         /// </summary>
         /// <param name="userInput">1 character length string the user guesses</param>
         /// <param name="chosenWord">the random word for current game</param>
@@ -247,9 +250,18 @@ namespace Lab03_SystemIO
             // ToString() does not create a new object in memory. It simply returns the object.
             if (guessRight)
             {
-                int indexOfLetter = sb.ToString().IndexOf(userInput, 0, chosenWord.Length, StringComparison.CurrentCultureIgnoreCase);
-                sb.Replace("_", userInput, indexOfLetter, 1);
+                userInput = userInput.PadRight(1);
+
+                for (int i = 0; i < chosenWord.Length; i++)
+                {
+                    if (chosenWord[i].ToString().Equals(userInput, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        sb.Remove(i, 1);
+                        sb.Insert(i, userInput, 1);
+                    }
+                }
             }
+            else Console.WriteLine("not right");
 
             return sb;
         }
