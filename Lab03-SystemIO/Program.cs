@@ -49,10 +49,10 @@ namespace Lab03_SystemIO
         }
 
         /// <summary>
-        ///  
+        ///  This method reads the file and populates a string array with the read lines.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">relative path of file to be read</param>
+        /// <returns>an array of strings</returns>
         public static string[] ReadFile(string path)
         {
             using (StreamReader sr = File.OpenText(path))
@@ -77,6 +77,12 @@ namespace Lab03_SystemIO
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="userInput"></param>
+        /// <returns></returns>
         public static bool AppendToFile(string path, string userInput)
         {
             using (StreamWriter sw = File.AppendText(path))
