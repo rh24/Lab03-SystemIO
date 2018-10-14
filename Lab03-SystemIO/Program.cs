@@ -16,6 +16,7 @@ namespace Lab03_SystemIO
 
             //DeleteLineFromFile(path, "chocolate");
             Console.WriteLine(DisplayUnderscoresFromChosenWord(path));
+            GetUserGuess();
         }
 
         public static string[] seedFile = { "chocolate", "moist", "turtles", "easter", "christmas" };
@@ -189,6 +190,19 @@ namespace Lab03_SystemIO
             }
 
             return sb.ToString();
+        }
+
+        public static string GetUserGuess()
+        {
+            string userInput;
+
+            do
+            {
+                Console.WriteLine("Guess a letter. Make sure you're only guessing one letter!");
+                userInput = Console.ReadLine();
+            } while (userInput.Length != 1);
+
+            return userInput;
         }
     }
 }
