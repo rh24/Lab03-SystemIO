@@ -144,10 +144,6 @@ namespace Lab03_SystemIO
                     {
                         AppendToFile(path, existingWords[i]);
                     }
-                    else
-                    {
-                        continue;
-                    }
                 }
 
                 //return remainingWords;
