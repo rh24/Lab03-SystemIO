@@ -160,5 +160,13 @@ namespace Lab03_SystemIO
 
             return File.Exists(path);
         }
+
+        public static string ChooseRandomWordFromFile(string path)
+        {
+            Random rand = new Random();
+            int randIdx = rand.Next(ReadFile(path).Length);
+
+            return ReadFile(path)[randIdx];
+        }
     }
 }
