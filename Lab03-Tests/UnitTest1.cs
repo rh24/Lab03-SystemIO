@@ -43,10 +43,9 @@ namespace Lab03_Tests
         {
             AppendToFile(path, words);
             string[] allStringsReturn = ReadFile(path);
-            bool firstWordFromPreviousTestIsContained = allStringsReturn.Contains("hello world");
             bool recentlyAppendedWordsAreContained = allStringsReturn.Contains("birds") && allStringsReturn.Contains("feather");
 
-            Assert.Equal(expected, firstWordFromPreviousTestIsContained && recentlyAppendedWordsAreContained);
+            Assert.Equal(expected, recentlyAppendedWordsAreContained);
 
         }
 

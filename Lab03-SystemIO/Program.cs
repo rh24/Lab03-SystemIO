@@ -17,19 +17,21 @@ namespace Lab03_SystemIO
 
             string randomWord = ChooseRandomWordFromFile(path);
             StringBuilder underscoredWord = DisplayUnderscoresFromChosenWord(randomWord);
-            Console.WriteLine(String.Join(" ", underscoredWord.ToString().ToCharArray()));
-            //string userInput = GetUserGuess();
-            //SaveUserGuessesToFile(userGuesses, userInput);
+            Console.WriteLine(string.Join(" ", underscoredWord.ToString().ToCharArray()));
 
-            // while not won
-            do
+
+            while (!GameOver)
             {
                 string userInput = GetUserGuess();
                 SaveUserGuessesToFile(userGuesses, userInput);
                 underscoredWord = CheckIfUserGuessIsInChosenWord(userGuesses, userInput, randomWord, underscoredWord);
-                Console.WriteLine(String.Join(" ", underscoredWord.ToString().ToCharArray()));
-
-            } while (!GameOver);
+                Console.WriteLine(string.Join(" ", underscoredWord.ToString().ToCharArray()));
+                if (!Regex.IsMatch(underscoredWord.ToString(), "_", RegexOptions.IgnoreCase))
+                {
+                    Console.WriteLine("You win!");
+                    break;
+                }
+            }
         }
 
         public static string StartGame()
@@ -55,7 +57,7 @@ namespace Lab03_SystemIO
                 {
                     try
                     {
-                        sw.WriteLine("Success!");
+                        sw.WriteLine("File creates! Success!");
                     }
                     catch (Exception)
                     {
@@ -271,7 +273,6 @@ namespace Lab03_SystemIO
         public static StringBuilder CheckIfUserGuessIsInChosenWord(string path, string userInput, string chosenWord, StringBuilder sb)
         {
             bool guessRight = Regex.IsMatch(chosenWord, userInput, RegexOptions.IgnoreCase);
-            bool anyGuessesLeft = Regex.IsMatch(sb.ToString(), "_", RegexOptions.IgnoreCase);
             SaveUserGuessesToFile(path, userInput);
 
             // ToString() does not create a new object in memory. It simply returns the object.
@@ -285,11 +286,6 @@ namespace Lab03_SystemIO
                         sb.Insert(i, userInput, 1);
                     }
                 }
-            }
-            else if (!anyGuessesLeft)
-            {
-                GameOver = true;
-                Console.WriteLine("You win!!");
             }
             else Console.WriteLine("Not right. Try again.");
 
