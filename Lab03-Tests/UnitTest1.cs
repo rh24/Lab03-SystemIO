@@ -29,6 +29,27 @@ namespace Lab03_Tests
             Assert.Equal(expected, isContainedInFile);
         }
 
+        /// <summary>
+        /// This method tests whether all words can be retrieved from a file. The words currently contained in ../testFile.txt are "hello world." I will add more words in this method.
+        /// </summary>
+        /// <param name="expected">expected outcome</param>
+        /// <param name="path">file to read</param>
+        // Do we not need to use the new keyword anymore for initializing new arrays?
+        public static string[] words = new string[] { "birds", "feather" };
+
+        [Theory]
+        [InlineData(true, "../testFile.txt")]
+        public static void RetreiveAllWords(bool expected, string path)
+        {
+            AppendToFile(path, words);
+            string[] allStringsReturn = ReadFile(path);
+            bool firstWordFromPreviousTestIsContained = allStringsReturn.Contains("hello world");
+            bool recentlyAppendedWordsAreContained = allStringsReturn.Contains("birds") && allStringsReturn.Contains("feather");
+
+            Assert.Equal(expected, firstWordFromPreviousTestIsContained && recentlyAppendedWordsAreContained);
+
+        }
+
         /*
         Test that a file can be created
         Test that a file can be updated
@@ -54,6 +75,11 @@ namespace Lab03_Tests
             Assert.Equal(expected, isContainedInFile);
         }
 
+        /// <summary>
+        /// This method tests whether a file gets deleted.
+        /// </summary>
+        /// <param name="expected">expected outcome</param>
+        /// <param name="path">tile to be deleted</param>
         [Theory]
         [InlineData(false, "../testFile.txt")]
         public void CanDeleteAFile(bool expected, string path)
