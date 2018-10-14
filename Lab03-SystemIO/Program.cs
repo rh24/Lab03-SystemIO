@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Lab03_SystemIO
 {
@@ -15,11 +16,17 @@ namespace Lab03_SystemIO
             //AppendToFile(path, Console.ReadLine());
 
             //DeleteLineFromFile(path, "chocolate");
-            Console.WriteLine(DisplayUnderscoresFromChosenWord(path));
-            Console.WriteLine(GetUserGuess());
+            string randomWord = ChooseRandomWordFromFile(path);
+            string underScoredWord = DisplayUnderscoresFromChosenWord(randomWord).ToString();
+            string userInput = GetUserGuess();
+
+            // while not won
+            CheckIfUserGuessIsInChosenWord(randomWord, userInput);
+
         }
 
         public static string[] seedFile = { "chocolate", "moist", "turtles", "easter", "christmas" };
+        public static StringComparer CurrentCultureIgnoreCase { get; }
 
         /// <summary>
         /// This method creates a file if it doesn't already exist.
@@ -191,9 +198,8 @@ namespace Lab03_SystemIO
         /// </summary>
         /// <param name="path">relative path of file containing words</param>
         /// <returns>a string of underscores</returns>
-        public static string DisplayUnderscoresFromChosenWord(string path)
+        public static StringBuilder DisplayUnderscoresFromChosenWord(string chosenWord)
         {
-            string chosenWord = ChooseRandomWordFromFile(path);
             StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < chosenWord.Length; i++)
@@ -201,7 +207,7 @@ namespace Lab03_SystemIO
                 sb.Append("_ ");
             }
 
-            return sb.ToString();
+            return sb;
         }
 
         /// <summary>
@@ -229,14 +235,18 @@ namespace Lab03_SystemIO
         }
 
         /// <summary>
-        /// 
+        /// I have set a property on my Program class called CurrentCultureIgnoreCase. It is of type StringComparer.
+        /// This method uses declares two variables of type StringComparer and then does a case insensitive string comparison between their references.
         /// </summary>
-        /// <param name="userInput"></param>
-        /// <returns></returns>
-        //public static bool CheckIfUserGuessIsInChosenWord(string userInput)
-        //{
+        /// <param name="userInput">1 character length string the user guesses</param>
+        /// <param name="chosenWord">the random word for current game</param>
+        /// <returns>true or false, depending on whether the chosen word contains the guessed letter</returns>
+        public static string CheckIfUserGuessIsInChosenWord(string userInput, string chosenWord)
+        {
+            StringBuilder sb = new StringBuilder();
+            bool guessRight = Regex.IsMatch(chosenWord, userInput, RegexOptions.IgnoreCase);
 
-        //    return
-        //}
+            return newString;
+        }
     }
 }
