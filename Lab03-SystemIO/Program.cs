@@ -221,7 +221,6 @@ namespace Lab03_SystemIO
             try
             {
                 string[] existingWords = ReadFile(path);
-                //string[] remainingWords = new string[existingWords.Length - 1];
 
                 File.WriteAllText(path, String.Empty);
 
@@ -232,8 +231,6 @@ namespace Lab03_SystemIO
                         AppendToFile(path, existingWords[i]);
                     }
                 }
-
-                //return remainingWords;
             }
             catch (Exception)
             {

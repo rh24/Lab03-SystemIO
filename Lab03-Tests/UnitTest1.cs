@@ -53,8 +53,11 @@ namespace Lab03_Tests
         Test that the word chosen can accurately detect if the letter exists in the word(test that a letter does exist and does not exist)
         */
         [Theory]
-        [InlineData()]
-        public void
+        [InlineData(true, "han dynasty", "a")]
+        public void CanWordDetectIfLetterExistsInItself(bool expected, string wordToCheckAgainst, string checkFor)
+        {
+
+        }
 
         /// <summary>
         /// This method
