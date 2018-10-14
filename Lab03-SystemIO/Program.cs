@@ -10,8 +10,14 @@ namespace Lab03_SystemIO
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to my word guessing game! Enter exit at any point to quit.");
-            StartGame();
+            Console.WriteLine("Welcome to my word guessing game! Here are your options:");
+            DisplayMenu();
+        }
+
+        public static void DisplayMenu()
+        {
+            Console.WriteLine("1. Start playing a game." + System.Environment.NewLine + "2. Add a word to the random word file" + System.Environment.NewLine + "3. View words in the external word file" + System.Environment.NewLine + "4. Exit");
+            DelegateResponse(Console.ReadLine());
         }
 
 
@@ -52,16 +58,37 @@ namespace Lab03_SystemIO
             string input = userInput.ToLower();
             switch (input)
             {
+                // When a user wants to quit the console app, their history of guesses gets deleted.
                 case "y":
                     DeleteAFile("../../../guesses.txt");
                     StartGame();
                     break;
                 case "n":
                     Console.WriteLine("Thanks for playing!");
+                    DisplayMenu();
+                    break;
+                case "1":
+                    DeleteAFile("../../../guesses.txt");
+                    StartGame();
+                    break;
+                case "2":
+                    Console.WriteLine("Which word would you like to add?");
+                    string wordToAppend = Console.ReadLine();
+                    AppendToFile("../../../words.txt", wordToAppend);
+                    DisplayMenu();
+                    break;
+                case "3":
+                    Console.WriteLine("Here are all the words in the words.txt file:");
+                    Console.WriteLine(string.Join(System.Environment.NewLine, ReadFile("../../../words.txt")));
+                    DisplayMenu();
+                    break;
+                case "4":
+                    Console.WriteLine("Have a great day!");
                     System.Environment.Exit(-1);
                     break;
                 default:
-                    Console.WriteLine("Please repond y/n");
+                    Console.WriteLine("I didn't catch that. Please, enter a valid input.");
+                    DisplayMenu();
                     break;
             }
         }
@@ -143,7 +170,7 @@ namespace Lab03_SystemIO
             {
                 try
                 {
-                    sw.WriteLine(userInput);
+                    sw.WriteLine(userInput + Environment.NewLine);
                     return true;
                 }
                 catch (Exception)

@@ -52,6 +52,8 @@ namespace Lab03_Tests
         /*
         Test that the word chosen can accurately detect if the letter exists in the word(test that a letter does exist and does not exist)
         */
+        [Theory]
+        [InlineData()]
 
         /// <summary>
         /// This method
