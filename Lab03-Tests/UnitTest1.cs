@@ -54,6 +54,7 @@ namespace Lab03_Tests
         */
         [Theory]
         [InlineData()]
+        public void
 
         /// <summary>
         /// This method

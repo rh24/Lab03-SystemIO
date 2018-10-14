@@ -78,8 +78,8 @@ namespace Lab03_SystemIO
                     DisplayMenu();
                     break;
                 case "3":
-                    Console.WriteLine("Here are all the words in the words.txt file:");
-                    ReadFile("../../../words.txt");
+                    Console.WriteLine("Here are all the words in the words.txt file:" + Environment.NewLine);
+                    Console.WriteLine(string.Join(", ", ReadFile("../../../words.txt")) + Environment.NewLine);
                     DisplayMenu();
                     break;
                 case "4":
@@ -141,13 +141,6 @@ namespace Lab03_SystemIO
             {
                 try
                 {
-                    string s = "";
-
-                    while ((s = sr.ReadLine()) != null)
-                    {
-                        Console.WriteLine(s);
-                    }
-
                     string[] readWords = File.ReadAllLines(path);
 
                     return readWords;

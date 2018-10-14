@@ -1,17 +1,1 @@
 File creates! Success!
-c
-c
-h
-h
-r
-r
-i
-i
-s
-s
-t
-t
-m
-m
-a
-a
