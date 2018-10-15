@@ -311,7 +311,7 @@ namespace Lab03_SystemIO
 
         /// <summary>
         /// This method uses StringComparison.CurrentCultureIgnoreCase and Regex to do a case insensitive string comparison between their references.
-        /// I use regex in an overloaded method to check if there even is a match in the word before trying to find the index of the guessed letter. This is to running the for loop if I don't have to.
+        /// I use regex in an overloaded method to check if there even is a match in the word before trying to find the index of the guessed letter. This is to avoid running the for loop if I don't have to.
         /// </summary>
         /// <param name="userInput">1 character length string the user guesses</param>
         /// <param name="chosenWord">the random word for current game</param>
