@@ -49,7 +49,7 @@ namespace Lab03_SystemIO
 
                 if (!blanksLeft)
                 {
-                    Console.WriteLine("You win!! Want to play again?");
+                    Console.WriteLine("You win!! Want to play again? y/n");
                     DelegateResponse(Console.ReadLine());
                     break;
                 }
