@@ -3,3 +3,5 @@ christmas
 turtles
 happiness
 chocolate
+computer
+summer

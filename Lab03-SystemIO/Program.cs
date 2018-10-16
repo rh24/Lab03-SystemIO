@@ -175,7 +175,7 @@ namespace Lab03_SystemIO
             {
                 try
                 {
-                    sw.WriteLine(userInput + Environment.NewLine);
+                    sw.WriteLine(userInput);
                     return true;
                 }
                 catch (Exception)
